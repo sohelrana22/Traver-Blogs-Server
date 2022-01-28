@@ -18,7 +18,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    const userDb = client.db("travelBlog");
+    const userDb = client.db("Travel-Blogs");
     const usersCollection = userDb.collection("users");
     const usersBlogs = userDb.collection("userBlog");
     app.post("/saveusers", async (req, res) => {
@@ -89,7 +89,7 @@ async function run() {
       const findBlog = await usersBlogs.findOne({ _id: id });
       res.send(findBlog);
     });
-    app.get("/gethomeblogs", async (req, res) => {
+    app.get("/blogs_collection", async (req, res) => {
       const cursor = usersBlogs.find({ status: "approved" });
       const blogsCount = await usersBlogs.find({ status: "approved" }).count();
       const page = req.query.page;
